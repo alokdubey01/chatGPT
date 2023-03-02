@@ -5,25 +5,14 @@ import {
   Image,
   Pressable,
   FlatList,
+  SafeAreaView,
 } from "react-native";
 import React, { useState } from "react";
 import {
-  Avatar,
-  Banner,
-  Button,
-  Chip,
-  Divider,
-  ListItem,
   Stack,
-  Switch,
   Text,
-  TextInput,
 } from "@react-native-material/core";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import {
-  AntDesign,
-  Entypo,
-  FontAwesome,
   Ionicons,
   MaterialIcons,
   MaterialCommunityIcons,
@@ -31,8 +20,8 @@ import {
 
 export default function Setting({ navigation}) {
   return (
-    <View style={styles.container}>
-      <Stack style={{ paddingTop: 30 }}>
+    <SafeAreaView style={styles.container}>
+      <Stack style={{ paddingTop: 30, paddingBottom: 10 }}>
         <Stack style={styles.header}>
           <Stack style={styles.row}>
             <Ionicons onPress={()=> {navigation.goBack()}} name="ios-chevron-back-sharp" size={24} color="white" />
@@ -42,43 +31,20 @@ export default function Setting({ navigation}) {
           </Stack>
         </Stack>
       </Stack>
-      <Stack>
-        <Banner
-          style={{
-            marginTop: 24,
-            marginLeft: 20,
-            marginRight: 20,
-            borderRadius: 20,
-            marginBottom: 10,
-            backgroundColor: "#1a262f",
-            color: "white",
-          }}
-          illustration={(props) => (
-            <Avatar
-              color="primary"
-              icon={(props) => <Icon name="wifi-off" {...props} />}
-              {...props}
-            />
-          )}
-          text="There was a problem processing a transaction on your credit card."
-        />
-      </Stack>
-      {/* <Stack style={styles.flex}>
-      <Stack style={{ flexDirection: "row" }}>
-        <Ionicons
-          style={styles.listIcons}
-          name="moon-outline"
-          size={24}
-          color="black"
-        />
-        <Text style={{ marginTop: 5, marginLeft: 10 }}>Dark Mode</Text>
-      </Stack>
-      <MaterialIcons name="arrow-forward-ios" style={{marginTop:10}} size={16} color="#707070" />
-    </Stack> */}
-
+      <TouchableOpacity activeOpacity={1} onPress={()=> navigation.navigate('Buy')}>
+          <Stack style={styles.flex}>
+            <Stack style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#1a252e', width: '100%', paddingHorizontal: 20, borderRadius: 20 }}>
+              <Stack>
+                <Text style={{color:'white', fontSize: 24, fontWeight: '600'}}>Go Premium</Text>
+                <Text style={{color:'white', fontSize: 12}}>Unlock All Features & No-ads</Text>
+              </Stack>
+              <Image style={{height: 130, width: 160, marginLeft:30}} source={require('../assets/img_upgrade_to_pro.png')}/>
+            </Stack>
+          </Stack>
+      </TouchableOpacity>
       <View>
         <Text style={{color: 'white', marginLeft: 20, marginBottom: 10, fontWeight: '600', textTransform: 'uppercase', fontSize: 12}}>General</Text>
-        <Stack style={styles.flex}>
+        <TouchableOpacity activeOpacity={1} onPress={()=>console.log('Hello Worls')} style={styles.flex}>
           <Stack style={{ flexDirection: "row" }}>
             <MaterialCommunityIcons
               style={styles.listIcons}
@@ -86,7 +52,7 @@ export default function Setting({ navigation}) {
               size={16}
               color="white"
             />
-            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Dark Mode</Text>
+            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Restore</Text>
           </Stack>
           <MaterialIcons
             name="arrow-forward-ios"
@@ -94,8 +60,8 @@ export default function Setting({ navigation}) {
             size={16}
             color="white"
           />
-        </Stack>
-        <Stack style={styles.flex}>
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={1} onPress={()=>console.log('Hello Worls')} style={styles.flex}>
           <Stack style={{ flexDirection: "row" }}>
             <MaterialCommunityIcons
               style={styles.listIcons}
@@ -103,7 +69,7 @@ export default function Setting({ navigation}) {
               size={16}
               color="white"
             />
-            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Dark Mode</Text>
+            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Terms Of Services</Text>
           </Stack>
           <MaterialIcons
             name="arrow-forward-ios"
@@ -111,8 +77,8 @@ export default function Setting({ navigation}) {
             size={16}
             color="white"
           />
-        </Stack>
-        <Stack style={styles.flex}>
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={1} onPress={()=>console.log('Hello Worls')} style={styles.flex}>
           <Stack style={{ flexDirection: "row" }}>
             <MaterialCommunityIcons
               style={styles.listIcons}
@@ -120,7 +86,7 @@ export default function Setting({ navigation}) {
               size={16}
               color="white"
             />
-            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Dark Mode</Text>
+            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Privacy Policy</Text>
           </Stack>
           <MaterialIcons
             name="arrow-forward-ios"
@@ -128,8 +94,8 @@ export default function Setting({ navigation}) {
             size={16}
             color="white"
           />
-        </Stack>
-        <Stack style={styles.flex}>
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={1} onPress={()=> navigation.navigate('manage_subscription')} style={styles.flex}>
           <Stack style={{ flexDirection: "row", justifyContent: 'center', alignItems: 'center' }}>
             <Ionicons
               style={styles.listIcons}
@@ -137,7 +103,7 @@ export default function Setting({ navigation}) {
               size={16}
               color="white"
             />
-            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Dark Mode</Text>
+            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Manage Subscription</Text>
           </Stack>
           <MaterialIcons
             name="arrow-forward-ios"
@@ -145,11 +111,11 @@ export default function Setting({ navigation}) {
             size={16}
             color="white"
           />
-        </Stack>
+        </TouchableOpacity>
       </View>
       <View>
         <Text style={{color: 'white', marginLeft: 20, marginBottom: 10, fontWeight: '600', textTransform: 'uppercase', fontSize: 12}}>General</Text>
-        <Stack style={styles.flex}>
+        <TouchableOpacity activeOpacity={1} onPress={()=>console.log('Hello Worls')} style={styles.flex}>
           <Stack style={{ flexDirection: "row" }}>
             <MaterialCommunityIcons
               style={styles.listIcons}
@@ -157,7 +123,7 @@ export default function Setting({ navigation}) {
               size={16}
               color="white"
             />
-            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Dark Mode</Text>
+            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Rate Us</Text>
           </Stack>
           <MaterialIcons
             name="arrow-forward-ios"
@@ -165,8 +131,8 @@ export default function Setting({ navigation}) {
             size={16}
             color="white"
           />
-        </Stack>
-        <Stack style={styles.flex}>
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={1} onPress={()=>console.log('Hello Worls')} style={styles.flex}>
           <Stack style={{ flexDirection: "row" }}>
             <MaterialCommunityIcons
               style={styles.listIcons}
@@ -174,7 +140,7 @@ export default function Setting({ navigation}) {
               size={16}
               color="white"
             />
-            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Dark Mode</Text>
+            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Share App</Text>
           </Stack>
           <MaterialIcons
             name="arrow-forward-ios"
@@ -182,8 +148,8 @@ export default function Setting({ navigation}) {
             size={16}
             color="white"
           />
-        </Stack>
-        <Stack style={styles.flex}>
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={1} onPress={()=>console.log('Hello Worls')} style={styles.flex}>
           <Stack style={{ flexDirection: "row" }}>
             <MaterialCommunityIcons
               style={styles.listIcons}
@@ -191,7 +157,7 @@ export default function Setting({ navigation}) {
               size={16}
               color="white"
             />
-            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Dark Mode</Text>
+            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Contact Us</Text>
           </Stack>
           <MaterialIcons
             name="arrow-forward-ios"
@@ -199,8 +165,8 @@ export default function Setting({ navigation}) {
             size={16}
             color="white"
           />
-        </Stack>
-        <Stack style={styles.flex}>
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={1} onPress={()=>console.log('Hello Worls')} style={styles.flex}>
           <Stack style={{ flexDirection: "row", justifyContent: 'center', alignItems: 'center' }}>
             <Ionicons
               style={styles.listIcons}
@@ -208,7 +174,7 @@ export default function Setting({ navigation}) {
               size={16}
               color="white"
             />
-            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Dark Mode</Text>
+            <Text style={{ marginTop: 5, marginLeft: 10, color: 'white' }}>Restore</Text>
           </Stack>
           <MaterialIcons
             name="arrow-forward-ios"
@@ -216,9 +182,9 @@ export default function Setting({ navigation}) {
             size={16}
             color="white"
           />
-        </Stack>
+        </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

@@ -39,6 +39,16 @@ const DATA = [
     id: 6,
     title: "Make 5 distinct CTA messages and buttons for [Your product]",
   },
+  {id: 7,
+  title: "Create a [social media] campaign plan for launching an [your product], aimed at [your target audience]"},
+  {id: 8,
+  title: "Analyse the [social media] campaign plan for launching an [your product], aimed at [your target audience]"},
+  {id: 9,
+  title: "Analyze these below metrics to improve email open rates"},
+  {id: 10,
+  title: "Write follow up email to [email address]"},
+  {id: 11,
+  title: "Structs a [social media] campaign plan for launching an [your product], aimed at [your target audience]"},
 ];
 
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
@@ -69,7 +79,7 @@ export default function Marketting({ navigation }) {
     return (
       <Item
         item={item}
-        onPress={() => setSelectedId(item.id)}
+        onPress={() => navigation.navigate("ChatReturn", { text: item })}
         backgroundColor={backgroundColor}
         textColor={color}
         padding={padding}

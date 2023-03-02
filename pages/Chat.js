@@ -1,14 +1,22 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  TextInput,
+  Image,
+} from "react-native";
 import React from "react";
 import { Box, Button, Stack } from "@react-native-material/core";
 import axios from "axios";
-import { Feather } from '@expo/vector-icons';
+import { Feather } from "@expo/vector-icons";
 
-export default function Chat() {
+export default function Chat({ navigation }) {
   const [data, setData] = React.useState([]);
   const [textInput, setTextInput] = React.useState("");
-  const apiKey = "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";
-  const apiUrl = "https://api.openai.com/v1/completions"
+  const apiKey = "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";
+  const apiUrl = "https://api.openai.com/v1/completions";
 
   const handleSend = async () => {
     const question = textInput;
@@ -31,6 +39,7 @@ export default function Chat() {
         },
       }
     );
+
     const text = response.data.choices[0].text;
     console.log(response.data);
     console.log(text);
@@ -44,34 +53,85 @@ export default function Chat() {
 
   return (
     <View style={styles.container}>
+      <Stack style={{ paddingTop: 30, paddingBottom: 10 }}>
+        <Stack style={styles.header}>
+          <Stack />
+          <Text style={{ color: "white", fontSize: 20, marginLeft: 10 }}>
+            Chat
+          </Text>
+          <Image
+            style={{ height: 20, width: 20 }}
+            source={require("../assets/icons/ic_premium_crown.png")}
+          />
+        </Stack>
+      </Stack>
+      <Stack style={{ flexDirection: "row", padding: 10 }}>
+        <Text style={styles.message}> How can I help you today? </Text>
+      </Stack>
       <FlatList
         data={data}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <View style={{ flexDirection: "row", padding: 10 }}>
-            <Text style={{ color: item.type === "Human" ? "red" : "blue" }}>
-              {item.type === "Human" ? "Human" : "AI"}
-            </Text>
-            <Box style={styles.messages}>
-        <Text style={styles.message}>
-        {item.text}
-        </Text>
-      </Box>
+          <View>
+            <Stack style={{ flexDirection: "row", padding: 10 }}>
+              {item.type === "Human" ? (
+                () => null
+              ) : (
+                <Text style={styles.message1}> {item.text} </Text>
+              )}
+            </Stack>
+            <Stack
+              style={{
+                flexDirection: "row",
+                padding: 10,
+                alignSelf: "flex-end",
+              }}
+            >
+              {item.type === "AI" ? (
+                () => null
+              ) : (
+                <Text style={styles.message2}> {item.text} </Text>
+              )}
+            </Stack>
           </View>
         )}
       />
-      <Stack style={{flexDirection: 'row'}}>
-      <TextInput
-        value={textInput}
-        style={{borderRadius: 30, width: '60%', backgroundColor: '#fff', padding: 10}}
-        onChangeText={(text) => setTextInput(text)}
-        placeholder="Ask me Anything"
-      />
-<TouchableOpacity style={{backgroundColor: '#fff', borderRadius: 50, justifyContent: 'center', height: 40, width: 40, margin: 'auto'}}>
-      <Feather name="send" size={24} color="black" />
-      </TouchableOpacity>
+      <Stack
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          paddingHorizontal: 10,
+          paddingVertical: 20,
+        }}
+      >
+        <Image
+          style={{ height: 30, width: 30 }}
+          source={require("../assets/icons/ic_share.png")}
+        />
+        <TextInput
+          value={textInput}
+          style={{
+            borderRadius: 30,
+            width: "60%",
+            backgroundColor: "#475158",
+            padding: 10,
+            height: 40,
+            color: "white",
+          }}
+          onChangeText={(text) => setTextInput(text)}
+          placeholder="Ask me Anything"
+        />
+        <TouchableOpacity
+          style={{
+            borderRadius: 50,
+            justifyContent: "center",
+          }}
+          onPress={handleSend}
+        >
+          <Image style={{height: 40, width: 40}} source={require('../assets/icons/ic_send_circle_enable.png')} />
+        </TouchableOpacity>
       </Stack>
-      <Button onPress={handleSend} title="Send" />
     </View>
   );
 }
@@ -79,27 +139,36 @@ export default function Chat() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1a262f",
-    paddingTop: 40,
+    backgroundColor: "#11181e",
   },
-  messages: {
-    padding: 20,
-    flexShrink: 2,  
-    overflow: 'auto',
-    boxShadow: 'inset 0 2rem 2rem -2rem rgba(0, 0, 0, 0.05), inset 0 -2rem 2rem -2rem rgba(0, 0, 0, 0.05))',
+  header: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 20,
   },
   message: {
-    boxSize: 'border-box',
     padding: 10,
-    margin: '1rem',
-    backgroundColor: '#fff',
+    margin: 10,
+    backgroundColor: "#475158",
+    color: "#fff",
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     borderBottomRightRadius: 40,
     borderBottomLeftRadius: 0,
-    minHeight: '2.25rem',
-    width: 'fit-content',
-    maxWidth: '66%',
-    boxShadow: '0 0.2rem rgba(0,0,0,0.075), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.1)',
-  }
+    minHeight: 20,
+    maxWidth: "66%",
+  },
+  message2: {
+    padding: 10,
+    margin: 10,
+    backgroundColor: "blue",
+    color: "#fff",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    borderBottomRightRadius: 0,
+    borderBottomLeftRadius: 40,
+    minHeight: 20,
+    maxWidth: "66%",
+  },
 });

@@ -69,7 +69,7 @@ export default function Music({ navigation }) {
     return (
       <Item
         item={item}
-        onPress={() => setSelectedId(item.id)}
+        onPress={() => navigation.navigate("ChatReturn", { text: item })}
         backgroundColor={backgroundColor}
         textColor={color}
         padding={padding}
